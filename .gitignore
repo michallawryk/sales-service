@@ -1,0 +1,65 @@
+# ==============================
+# GLOBAL
+# ==============================
+*.log
+*.tmp
+*.swp
+*.swo
+*.bak
+
+# Ignore environment variable files
+.environment
+.env.*
+
+# npm package lock file (optional)
+# Uncomment if you're using yarn only
+# package-lock.json
+
+# Ignore IDE config files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# ==============================
+# BACKEND (Node.js)
+# ==============================
+backend/node_modules/
+backend/dist/
+backend/build/
+backend/coverage/
+backend/.env
+backend/.env.*
+
+# PM2 logs or temporary files
+backend/pids/
+backend/logs/
+
+# ==============================
+# FRONTEND (Angular CLI)
+# ==============================
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+frontend/coverage/
+frontend/.env
+frontend/.env.*
+
+# Angular local environment
+frontend/.vscode/
+frontend/.idea/
+
+# ==============================
+# OS-SPECIFIC FILES
+# ==============================
+# macOS
+*.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~

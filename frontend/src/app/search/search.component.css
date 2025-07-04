@@ -1,0 +1,118 @@
+/* main.css */
+
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* ===== Colors ===== */
+    --body-color: #E4E9F7;
+    --sidebar-color: #FFF;
+    --primary-color: #695CFE;
+    --primary-color-light: #F6F5FF;
+    --toggle-color: #DDD;
+    --text-color: #707070;
+    --price-color: #FF5733; /* Price color */
+
+    /* ===== Transition ===== */
+    --tran-02: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.4s ease;
+    --tran-05: all 0.5s ease;
+}
+
+body {
+    height: 100vh;
+    background: var(--body-color);
+    transition: var(--tran-05);
+}
+
+body.dark {
+    --body-color: #18191A;
+    --sidebar-color: #242526;
+    --primary-color: #3A3B3C;
+    --primary-color-light: #3A3B3C;
+    --toggle-color: #FFF;
+    --text-color: #CCC;
+    --price-color: #FF5733; /* Price color in dark mode */
+}
+
+.home {
+    padding: 20px;
+}
+
+.ads-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-right: 250px;
+}
+
+.advertisement {
+    position: relative;
+    padding: 20px;
+    border-radius: 10px;
+    background: var(--primary-color-light);
+    overflow: hidden;
+    transition: var(--tran-03);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    height: 300px; /* Stała wysokość */
+    margin-right: 20px;
+}
+
+.advertisement img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.3; /* Opacity for background image */
+    z-index: 0;
+}
+
+.advertisement h2,
+.advertisement p {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.advertisement h2 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.advertisement p {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.advertisement .price {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--price-color); /* Price color */
+}
+
+body.dark .advertisement .price {
+    color: var(--price-color); /* Price color in dark mode */
+}
+
+.advertisement .date {
+    font-size: 12px;
+    color: var(--text-color);
+}
+
+.advertisement:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Dodaj cień po najechaniu kursorem */
+    transform: translateY(-5px); /* Podnieś trochę element */
+    cursor: pointer;
+}

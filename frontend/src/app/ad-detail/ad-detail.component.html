@@ -1,0 +1,12 @@
+<div class="ad-detail">
+  <div class="ad-detail-container">
+    <img [src]="ad.picture" alt="Ad Image" class="main-image">
+    <div class="ad-detail-info">
+      <h2>{{ ad.title }}</h2>
+      <p class="price">{{ ad.price | currency:'PLN' }}</p>
+      <p class="date">{{ ad.created_date | date:'dd MMM yyyy HH:mm' }}</p>
+      <p class="description">{{ ad.description }}</p>
+      <p class="owner">Wystawione przez: {{ ad.owner_name }}</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,84 @@
+npm init -y
+npm install express pg bcryptjs jsonwebtoken body-parser cors
+npm install --save-dev nodemon
+
+npm install -g @angular/cli
+ng new frontend --standalone=false
+
+npm install @angular/forms @angular/router
+
+
+
+CREATE DATABASE app
+    WITH
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'Polish_Poland.1250'
+    LC_CTYPE = 'Polish_Poland.1250'
+    LOCALE_PROVIDER = 'libc'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1
+    IS_TEMPLATE = False;
+
+
+CREATE DATABASE app;
+
+\c app
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+	email VARCHAR(100) UNIQUE NOT NULL,
+	is_superuser boolean DEFAULT false NOT NULL
+);
+
+CREATE TABLE ads (
+	id SERIAL PRIMARY KEY NOT NULL,
+	owner_id INT NOT NULL,
+	type VARCHAR(20) NOT NULL,
+	title VARCHAR(100) NOT NULL,
+	description VARCHAR(1000) NOT NULL,
+	picture VARCHAR(150) DEFAULT NULL,
+	created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	updated_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	CONSTRAINT fk_owner_ad FOREIGN KEY (owner_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE OR REPLACE FUNCTION update_updated_at_column()
+RETURNS TRIGGER AS $$
+BEGIN
+	NEW.updated_date = NOW();
+	RETURN NEW;
+END;
+$$ language 'plpgsql';
+
+CREATE TRIGGER update_example_table_update_date
+BEFORE UPDATE ON ads
+FOR EACH ROW
+EXECUTE PROCEDURE update_updated_at_column();
+
+CREATE TABLE fav (
+	id SERIAL PRIMARY KEY NOT NULL,
+	user_id INT NOT NULL,
+	ad_id INT NOT NULL,
+	CONSTRAINT fk_user_favs FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+	CONSTRAINT fk_ad_favs FOREIGN KEY (ad_id) REFERENCES ads(id) ON DELETE CASCADE
+);
+
+INSERT INTO users (
+	username, email, password, is_superuser)
+	VALUES ('Admin', 'admin@amw.pl', '$2a$10$LnYqbseAHChtyWP0xdG33OgdOBrYYC04LbHu4h79WCsSAqntkG5wS', 't');
+
+
+
+
+INSERT INTO public.ads(
+	owner_id, type, title, description, price, picture)
+	VALUES (2, 'motoryzacja','Volvos60 2004r' ,'Sprzedam Volvo s60 z 2004 roku po wypadku, silnik i skrzynia biegów stan idealny możliwość odpalenia, możliwość sprzedania na części. Więcej informacji udzielę telefonicznie.',4500.0,'https://ireland.apollo.olxcdn.com/v1/files/u89xbbmp5xa31-PL/image;s=1000x700'),
+			(3, 'motoryzacja', 'brixton crossfire 500', 'W dokumentach niemieckich wpisane 35 KW. Posiada dwie wgniotki na baku od lusterka, 2 kluczyki, stan jak nowy, opony i łańcuch jak nowe. Kontakt tylko telefoniczny 62 725 77 09 lub 7-9-1-2-8-6-2-1-7', 20000.0, 'https://ireland.apollo.olxcdn.com/v1/files/qvunma2wg7d1-PL/image;s=1000x700'),
+			(5, 'motoryzacja', 'Peugeot 308 1.6 HDI 120 km BUSINESS line 2017', 'Witam zainteresowanych Peugeotem 308 z dynamicznym silnikiem 1.6 HDI 120km BUSINESS line spalanie 4,9l. Rok produkcji 2017. Auto na co dzień użytkowane przez kobietę, zadbane, bezawaryjne. Sprzedaje z powodów finansowych. Ubezpieczenie OC ważne do 30.09.2024 Przegląd 3.10.2024 Zapraszam do kontaktu pod numerem telefonu 72*******22', 30900.0, 'https://ireland.apollo.olxcdn.com/v1/files/sdm488bffpo52-PL/image;s=1000x700'),
+			(4, 'elektronika', 'Gamingowy HP Victus 15-FA0193NW 15.6 IPS i5 8GB Ram 512GB SSD Gtx1650', 'Gamingowy HP Victus 15-FA0193NW 15.6 IPS i5 8GB Ram 512GB SSD Gtx1650. Stan prawie nowy. Kupiony w Maju 2023. Praktycznie leżał nieużywanu w szufladzie. W komplecie pudełko, zasilacz i dowów zakupu. Zainstalowany Win 11. Na obudowieledwo widoczna rysa (widoczne na zjdęciach) widać ją tylko pod odpowiednim kątem.', 1975.0, 'https://ireland.apollo.olxcdn.com/v1/files/d4bb94yoacv1-PL/image;s=1000x700'),
+			(5, 'dla dzieci', 'Lego Minifigures Series 17 Battle Dwarf', 'Oryginalna Lego Minifigures Seria 17 - Battle Dwarf Stan bardzo dobry, figurka była elementem kolekcji. Zapraszam do obejrzenia innych figurek', 64.80, 'https://ireland.apollo.olxcdn.com/v1/files/2tfukc1rv8jv3-PL/image;s=1000x700'),
+			(4, 'sport', 'Rower LIV Tempt S 29" 260km przebiegu', 'Cześć! Sprzedaję sprzęt mojej Pani - jednak nie pokochała tego rodzaju aktywności. Damski Giant, czyli Liv model Tempt. Zakupiony pod koniec lipca 2023 roku. Nadal na gwarancji. Przejechał raptem 260km. Rozmiar S na kołach 29". Amortyzator SR Suntour X1 o skoku 100mm z blokadą na kierownicy. Przerzutka tył Shimano Deore 9 blatów, przód Shimano Alivio 2 blaty. Hamulce tarczowe hydrauliczne przód/tył. Doposażony w licznik Gianta, koszyk i bidon Gianta, lampkę przednią i tylną oraz dzwonek. Zapraszam do oglądania, jazdy próbnej i zakupu. Pozdrawiam. Tomek',2999.0, 'https://ireland.apollo.olxcdn.com/v1/files/uacaohiny7i51-PL/image;s=1000x700'),
+			(3, 'antyki i kolekcje', 'Karta kolekcjonerska topps match attax UEFA champions league. 2018','Sprzedaję niepotrzebne karty piłkarskie.', 50.0, 'https://ireland.apollo.olxcdn.com/v1/files/vvyrf9m40vq61-PL/image;s=1000x700')

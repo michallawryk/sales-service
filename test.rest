@@ -1,0 +1,75 @@
+###
+POST http://localhost:3000/api/register
+Content-Type: application/json
+
+{
+    "username": "Grzegorz",
+    "email": "grzegorz@amw.pl",
+    "password": "Grzegorz123"
+}
+###
+GET http://localhost:3000/api/login
+Content-Type: application/json
+
+{
+    "username": "Admin",
+    "password": "Admin"
+}
+
+###
+GET http://localhost:3000/
+
+###
+POST http://localhost:3000/api/ads/search
+Content-Type: application/json
+
+{
+    "question": "Volvo"
+}
+
+###
+GET http://localhost:3000/api/users/ads/list
+Content-Type: application/json
+
+{
+    "owner_id": 2
+}
+
+###
+POST http://localhost:3000/api/ads/fav/add
+Content-Type: application/json
+
+{
+    "user_id": 2,
+    "ad_id": 2
+}
+
+###
+GET http://localhost:3000/api/users/fav/list
+Content-Type: application/json
+
+{
+    "user_id": 2
+}
+###
+POST http://localhost:3000/api/ads/fav/delete
+Content-Type: application/json
+
+{
+    "user_id": 2,
+    "ad_id": 2
+}
+
+###
+POST http://localhost:3000/api/ads/search
+Content-Type: application/json
+
+{
+    "question": "Volvo"
+}
+
+###
+GET http://localhost:3000/api/ads/2
+
+###
+GET http://localhost:3000/api/ads/list
