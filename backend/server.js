@@ -11,7 +11,7 @@ const port = 3000;
 app.use(bodyParser.json());
 app.use(cors());
 
-const secret = 'secret';
+const secret = process.env.JWT_SECRET || 'secret';
 
 app.post('/api/login', async (req, res) => {
   let { username, password} = req.body
@@ -31,7 +31,7 @@ app.post('/api/login', async (req, res) => {
     } else {
       res.status(400).json({ error: 'User does not exist' });
     }
-  } catch (err) {
+  } catch (error) {
       res.status(500).json({ error: 'Internal server error' });
   }
 })
@@ -42,8 +42,8 @@ app.post('/api/register', async (req, res) => {
   try {
     await pool.query('INSERT INTO users (username, password, email) VALUES ($1, $2, $3)', [username, hashedPAssword, email])
     res.status(201).json({ message: 'Successfully added new user'})
-  } catch (err) {
-    console.log(err)
+  } catch (error) {
+    console.log(error)
     res.status(400).json({ error: 'User already exists' })
   }
 })
@@ -51,9 +51,7 @@ app.post('/api/register', async (req, res) => {
 app.get("/api/ads/list", async (req, res) => {
   try {
     const ads = await pool.query('SELECT * FROM ads ORDER BY updated_date DESC')
-
-    res.status(201).json(ads.rows)
-
+    res.status(200).json(ads.rows)
   } catch (err) {
     res.status(500).json({ error: 'Internal server error' });
   }
@@ -62,23 +60,23 @@ app.get("/api/ads/list", async (req, res) => {
 app.post("/api/ads/search", async (req, res) => {
   let { question } = req.body;
   try {
-    const ads = await pool.query(`SELECT * FROM ads WHERE title LIKE '%${question}%' OR description LIKE '%${question}%' ORDER BY updated_date DESC`)
-
-    res.status(201).json(ads.rows)
-
-  } catch (err) {
+    const pattern = `%${question}%`;
+    const ads = await pool.query(
+      `SELECT * FROM ads WHERE title ILIKE $1 OR description ILIKE $1 ORDER BY updated_date DESC`, 
+      [pattern]
+    )
+    res.status(200).json(ads.rows)
+  } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
   }
 })
 
-app.get("/api/users/ads/list", async (req, res) => {
+app.post("/api/users/ads/list", async (req, res) => {
   let { owner_id } = req.body
   try {
     const ads = await pool.query('SELECT * FROM ads WHERE owner_id=$1 ORDER BY updated_date DESC', [owner_id])
-
-    res.status(201).json(ads.rows)
-
-  } catch (err) {
+    res.status(200).json(ads.rows)
+  } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
   }
 })
@@ -88,9 +86,9 @@ app.post('/api/ads/fav/add', async (req, res) => {
   try {
     await pool.query('INSERT INTO fav (user_id, ad_id) VALUES ($1, $2)', [user_id, ad_id])
     res.status(201).json({ message: 'Successfully added new fav'})
-  } catch (err) {
-    console.log(err)
-    res.status(400).json({ error: 'User already exists' })
+  } catch (error) {
+    console.log(error)
+    res.status(400).json({ error: 'Could not add fav' })
   }
 })
 
@@ -98,21 +96,19 @@ app.post('/api/ads/fav/delete', async (req, res) => {
   let { user_id, ad_id } = req.body
   try {
     await pool.query('DELETE FROM fav WHERE user_id=$1 AND ad_id=$2', [user_id, ad_id])
-    res.status(201).json({ message: `Successfully deleted fav from user ${user_id}`})
-  } catch (err) {
-    console.log(err)
-    res.status(400).json({ error: 'User already exists' })
+    res.status(200).json({ message: `Successfully deleted fav from user ${user_id}`})
+  } catch (error) {
+    console.log(error)
+    res.status(400).json({ error: 'Could not delete fav' })
   }
 })
 
-app.get("/api/users/fav/list", async (req, res) => {
+app.post("/api/users/fav/list", async (req, res) => {
   let { user_id } = req.body
   try {
     const ads = await pool.query('SELECT ads.* FROM ads JOIN fav ON ads.id = fav.ad_id WHERE fav.user_id = $1 ORDER BY updated_date DESC', [user_id])
-
-    res.status(201).json(ads.rows)
-
-  } catch (err) {
+    res.status(200).json(ads.rows)
+  } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
   }
 })
@@ -125,8 +121,8 @@ app.get('/api/ads/:id', async (req, res) => {
       return res.status(404).json({error: 'Advertisement not found' });
     }
     res.json(ads.rows[0]);
-  } catch {
-    console.error('Error executing querry', error);
+  } catch (error) {
+    console.error('Error executing query', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 })

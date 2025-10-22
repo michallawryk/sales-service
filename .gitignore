@@ -10,6 +10,7 @@
 # Ignore environment variable files
 .environment
 .env.*
+.env
 
 # npm package lock file (optional)
 # Uncomment if you're using yarn only
