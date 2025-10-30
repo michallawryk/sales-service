@@ -6,6 +6,7 @@
 *.swp
 *.swo
 *.bak
+*.txt
 
 # Ignore environment variable files
 .environment
@@ -64,3 +65,7 @@ $RECYCLE.BIN/
 
 # Linux
 *~
+
+# ==============================
+#OTHERS
+*.rest
