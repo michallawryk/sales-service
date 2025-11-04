@@ -7,9 +7,9 @@ import { AdDetailComponent } from '../ad-detail/ad-detail.component';
 
 @Component({
     selector: 'app-home',
-    imports: [CommonModule, AdDetailComponent],
-    templateUrl: './home.component.html',
-    styleUrl: './home.component.css'
+  imports: [CommonModule],
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
   adsList: Advertisement[] = [];

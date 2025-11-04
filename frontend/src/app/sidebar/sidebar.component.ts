@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { RouterLinkActive } from '@angular/router';
 import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-sidebar',
-    imports: [FormsModule, RouterLinkActive],
+  imports: [FormsModule],
     templateUrl: './sidebar.component.html',
-    styleUrl: './sidebar.component.css'
+    styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent {
 

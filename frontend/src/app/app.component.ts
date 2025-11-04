@@ -1,19 +1,15 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HomeComponent } from './home/home.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { AdsService } from './services/ads.service';
 import { Advertisement } from './home/ads';
-import { SearchComponent } from './search/search.component';
-
 import { Router } from '@angular/router';
-import { AdDetailComponent } from './ad-detail/ad-detail.component';
 
 @Component({
     selector: 'app-root',
-    imports: [RouterOutlet, HomeComponent, SidebarComponent, SearchComponent, AdDetailComponent],
-    templateUrl: './app.component.html',
-    styleUrl: './app.component.css'
+  imports: [RouterOutlet, SidebarComponent],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   searchResults: Advertisement[] = [];

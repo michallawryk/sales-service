@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
     selector: 'app-ad-detail',
     imports: [CommonModule],
     templateUrl: './ad-detail.component.html',
-    styleUrl: './ad-detail.component.css'
+    styleUrls: ['./ad-detail.component.css']
 })
 export class AdDetailComponent implements OnInit {
   ad: any ={};

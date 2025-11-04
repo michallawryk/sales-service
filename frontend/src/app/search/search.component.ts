@@ -8,7 +8,7 @@ import { AdsService } from '../services/ads.service';
     selector: 'app-search',
     imports: [CommonModule],
     templateUrl: './search.component.html',
-    styleUrl: './search.component.css'
+    styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit{
 
