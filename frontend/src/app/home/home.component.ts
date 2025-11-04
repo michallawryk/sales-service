@@ -6,11 +6,10 @@ import { Router } from '@angular/router';
 import { AdDetailComponent } from '../ad-detail/ad-detail.component';
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [NgIf,NgFor, CommonModule, AdDetailComponent],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+    selector: 'app-home',
+    imports: [NgIf, NgFor, CommonModule, AdDetailComponent],
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
   adsList: Advertisement[] = [];

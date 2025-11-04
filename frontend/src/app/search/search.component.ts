@@ -5,11 +5,10 @@ import { ActivatedRoute } from '@angular/router';
 import { AdsService } from '../services/ads.service';
 
 @Component({
-  selector: 'app-search',
-  standalone: true,
-  imports: [NgIf, NgFor, CommonModule],
-  templateUrl: './search.component.html',
-  styleUrl: './search.component.css'
+    selector: 'app-search',
+    imports: [NgIf, NgFor, CommonModule],
+    templateUrl: './search.component.html',
+    styleUrl: './search.component.css'
 })
 export class SearchComponent implements OnInit{
 

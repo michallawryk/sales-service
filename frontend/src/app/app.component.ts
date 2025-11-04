@@ -10,11 +10,10 @@ import { Router } from '@angular/router';
 import { AdDetailComponent } from './ad-detail/ad-detail.component';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, HomeComponent, SidebarComponent, SearchComponent, AdDetailComponent, CommonModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+    selector: 'app-root',
+    imports: [RouterOutlet, HomeComponent, SidebarComponent, SearchComponent, AdDetailComponent, CommonModule],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.css'
 })
 export class AppComponent {
   searchResults: Advertisement[] = [];

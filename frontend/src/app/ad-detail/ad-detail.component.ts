@@ -5,11 +5,10 @@ import { Advertisement } from '../home/ads';
 import { CommonModule, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-ad-detail',
-  standalone: true,
-  imports: [NgIf, CommonModule],
-  templateUrl: './ad-detail.component.html',
-  styleUrl: './ad-detail.component.css'
+    selector: 'app-ad-detail',
+    imports: [NgIf, CommonModule],
+    templateUrl: './ad-detail.component.html',
+    styleUrl: './ad-detail.component.css'
 })
 export class AdDetailComponent implements OnInit {
   ad: any ={};
