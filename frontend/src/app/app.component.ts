@@ -5,13 +5,13 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { AdsService } from './services/ads.service';
 import { Advertisement } from './home/ads';
 import { SearchComponent } from './search/search.component';
-import { CommonModule } from '@angular/common';
+
 import { Router } from '@angular/router';
 import { AdDetailComponent } from './ad-detail/ad-detail.component';
 
 @Component({
     selector: 'app-root',
-    imports: [RouterOutlet, HomeComponent, SidebarComponent, SearchComponent, AdDetailComponent, CommonModule],
+    imports: [RouterOutlet, HomeComponent, SidebarComponent, SearchComponent, AdDetailComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.css'
 })

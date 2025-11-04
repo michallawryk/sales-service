@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AdsService } from '../services/ads.service';
 import { Advertisement } from '../home/ads';
-import { CommonModule, NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-ad-detail',
-    imports: [NgIf, CommonModule],
+    imports: [CommonModule],
     templateUrl: './ad-detail.component.html',
     styleUrl: './ad-detail.component.css'
 })

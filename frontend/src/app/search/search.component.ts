@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Advertisement } from '../home/ads';
-import { NgFor, NgIf, CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { AdsService } from '../services/ads.service';
 
 @Component({
     selector: 'app-search',
-    imports: [NgIf, NgFor, CommonModule],
+    imports: [CommonModule],
     templateUrl: './search.component.html',
     styleUrl: './search.component.css'
 })

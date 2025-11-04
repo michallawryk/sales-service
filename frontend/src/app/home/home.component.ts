@@ -1,13 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Advertisement } from './ads';
 import { AdsService } from '../services/ads.service';
-import { NgFor, NgIf, CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AdDetailComponent } from '../ad-detail/ad-detail.component';
 
 @Component({
     selector: 'app-home',
-    imports: [NgIf, NgFor, CommonModule, AdDetailComponent],
+    imports: [CommonModule, AdDetailComponent],
     templateUrl: './home.component.html',
     styleUrl: './home.component.css'
 })
