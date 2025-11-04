@@ -1,15 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Advertisement } from '../home/ads';
-import { NgFor, NgIf, CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { AdsService } from '../services/ads.service';
 
 @Component({
-  selector: 'app-search',
-  standalone: true,
-  imports: [NgIf, NgFor, CommonModule],
-  templateUrl: './search.component.html',
-  styleUrl: './search.component.css'
+    selector: 'app-search',
+    imports: [CommonModule],
+    templateUrl: './search.component.html',
+    styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit{
 

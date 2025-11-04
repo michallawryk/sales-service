@@ -1,14 +1,16 @@
 <!-- search.component.html -->
 <div class="home">
   <div class="text">
-      <h1>Search results: {{searchResults.length}}</h1>
-      <div class="ads-grid">
-          <div *ngFor="let ad of searchResults" class="advertisement">
-              <img [src]="ad.picture" alt="Ad Image">
-              <h2>{{ ad.title }}</h2>
-              <p class="price">{{ ad.price | currency:'PLN' }}</p>
-              <p class="date">{{ ad.created_date | date:'dd MMM yyyy   HH:mm' }}</p>
-          </div>
-      </div>
+    <h1>Search results: {{searchResults.length}}</h1>
+    <div class="ads-grid">
+      @for (ad of searchResults; track ad) {
+        <div class="advertisement">
+          <img [src]="ad.picture" alt="Ad Image">
+          <h2>{{ ad.title }}</h2>
+          <p class="price">{{ ad.price | currency:'PLN' }}</p>
+          <p class="date">{{ ad.created_date | date:'dd MMM yyyy   HH:mm' }}</p>
+        </div>
+      }
+    </div>
   </div>
 </div>

@@ -1,16 +1,15 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Advertisement } from './ads';
 import { AdsService } from '../services/ads.service';
-import { NgFor, NgIf, CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AdDetailComponent } from '../ad-detail/ad-detail.component';
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [NgIf,NgFor, CommonModule, AdDetailComponent],
+    selector: 'app-home',
+  imports: [CommonModule],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
   adsList: Advertisement[] = [];
